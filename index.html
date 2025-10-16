@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 Carta de Amor Mágica para Rebe 💝</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Pacifico&family=Great+Vibes&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <!-- Pantalla de carga mágica -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="magic-heart">
+                <div class="heart-beat">💖</div>
+            </div>
+            <h2 class="loading-title">Preparando algo especial para Rebe...</h2>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <div class="sparkles">
+                <span>✨</span>
+                <span>💫</span>
+                <span>⭐</span>
+                <span>🌟</span>
+                <span>💝</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fondo con partículas -->
+    <div id="particles-js"></div>
+    
+    <!-- Fondo estrellado 3D -->
+    <div id="stars-container"></div>
+
+    <!-- Menú principal -->
+    <div id="main-menu" class="main-menu hidden">
+        <div class="menu-container">
+            <h1 class="main-title">💝 Para mi amor Rebe 💝</h1>
+            <div class="menu-options">
+                <button class="menu-btn" data-action="love-letter">
+                    <span class="btn-icon">💌</span>
+                    <span class="btn-text">Carta de Amor</span>
+                </button>
+                <button class="menu-btn" data-action="photo-gallery">
+                    <span class="btn-icon">📸</span>
+                    <span class="btn-text">Galería de Recuerdos</span>
+                </button>
+                <button class="menu-btn" data-action="love-quiz">
+                    <span class="btn-icon">💕</span>
+                    <span class="btn-text">Quiz del Amor</span>
+                </button>
+                <button class="menu-btn" data-action="music-box">
+                    <span class="btn-icon">🎵</span>
+                    <span class="btn-text">Caja Musical</span>
+                </button>
+                <button class="menu-btn" data-action="love-calendar">
+                    <span class="btn-icon">📅</span>
+                    <span class="btn-text">Calendario de Amor</span>
+                </button>
+                <button class="menu-btn" data-action="surprise">
+                    <span class="btn-icon">🎁</span>
+                    <span class="btn-text">Sorpresa Especial</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de carta de amor -->
+    <div id="love-letter-section" class="section hidden">
+        <div class="letter-container">
+            <div class="letter-envelope" id="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <div class="heart-seal">💖</div>
+                </div>
+            </div>
+            <div class="letter-paper" id="letter-paper">
+                <div class="letter-header">
+                    <h2>Para mi princesa Rebe 👑</h2>
+                    <div class="date">Con amor eterno ❤️</div>
+                </div>
+                <div class="letter-content" id="letter-content">
+                    <!-- El contenido se cargará dinámicamente -->
+                </div>
+                <div class="letter-signature">
+                    <p>Con todo mi amor,</p>
+                    <div class="signature">💕 Tu admirador secreto 💕</div>
+                </div>
+            </div>
+        </div>
+        <button class="back-btn" data-back="main-menu">← Volver al menú</button>
+    </div>
+
+    <!-- Galería de fotos -->
+    <div id="photo-gallery-section" class="section hidden">
+        <div class="gallery-container">
+            <h2>Nuestros Momentos Especiales 📸</h2>
+            <div class="photo-grid" id="photo-grid">
+                <!-- Las fotos se cargarán dinámicamente -->
+            </div>
+        </div>
+        <button class="back-btn" data-back="main-menu">← Volver al menú</button>
+    </div>
+
+    <!-- Quiz del amor -->
+    <div id="love-quiz-section" class="section hidden">
+        <div class="quiz-container">
+            <h2>¿Qué tanto sabes sobre nuestro amor? 💕</h2>
+            <div class="quiz-content" id="quiz-content">
+                <!-- El quiz se cargará dinámicamente -->
+            </div>
+        </div>
+        <button class="back-btn" data-back="main-menu">← Volver al menú</button>
+    </div>
+
+    <!-- Caja musical -->
+    <div id="music-box-section" class="section hidden">
+        <div class="music-box-container">
+            <h2>Nuestra Playlist del Amor 🎵</h2>
+            <div class="music-player">
+                <div class="now-playing">
+                    <div class="song-info">
+                        <h3 id="song-title">Selecciona una canción</h3>
+                        <p id="song-artist">❤️</p>
+                    </div>
+                    <div class="album-art">
+                        <div class="vinyl-record">🎵</div>
+                    </div>
+                </div>
+                <div class="playlist" id="playlist">
+                    <!-- La playlist se cargará dinámicamente -->
+                </div>
+                <div class="music-controls">
+                    <button id="prev-btn">⏮️</button>
+                    <button id="play-pause-btn">▶️</button>
+                    <button id="next-btn">⏭️</button>
+                </div>
+            </div>
+        </div>
+        <button class="back-btn" data-back="main-menu">← Volver al menú</button>
+    </div>
+
+    <!-- Calendario de amor -->
+    <div id="love-calendar-section" class="section hidden">
+        <div class="calendar-container">
+            <h2>Nuestro Calendario de Amor 📅</h2>
+            <div class="calendar" id="love-calendar">
+                <!-- El calendario se generará dinámicamente -->
+            </div>
+            <div class="event-details" id="event-details">
+                <h3>Selecciona una fecha especial ❤️</h3>
+            </div>
+        </div>
+        <button class="back-btn" data-back="main-menu">← Volver al menú</button>
+    </div>
+
+    <!-- Sorpresa especial -->
+    <div id="surprise-section" class="section hidden">
+        <div class="surprise-container">
+            <h2>¡Sorpresa Especial para Rebe! 🎁</h2>
+            <div class="surprise-content">
+                <div class="gift-box" id="gift-box">
+                    <div class="gift-lid"></div>
+                    <div class="gift-body"></div>
+                    <div class="gift-ribbon"></div>
+                    <div class="gift-bow">🎀</div>
+                </div>
+                <p>¡Haz clic en el regalo para abrirlo!</p>
+                <div class="surprise-message hidden" id="surprise-message">
+                    <!-- El mensaje sorpresa se mostrará aquí -->
+                </div>
+            </div>
+        </div>
+        <button class="back-btn" data-back="main-menu">← Volver al menú</button>
+    </div>
+
+    <!-- Controles de música de fondo -->
+    <div class="background-music-controls">
+        <button id="bg-music-toggle" title="Música de fondo">🎵</button>
+        <input type="range" id="volume-control" min="0" max="100" value="50">
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="bg-music" loop>
+        <source src="../Musica/Dove Cameron - Boyfriend (Official Video).mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Scripts -->
+    <script src="js/particles-config.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/love-letter.js"></script>
+    <script src="js/photo-gallery.js"></script>
+    <script src="js/love-quiz.js"></script>
+    <script src="js/music-box.js"></script>
+    <script src="js/love-calendar.js"></script>
+    <script src="js/surprise.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

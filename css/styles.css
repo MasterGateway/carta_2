@@ -1,0 +1,872 @@
+/* ===== VARIABLES Y FUENTES ===== */
+:root {
+    --primary-color: #ff6b9d;
+    --secondary-color: #ff8fab;
+    --accent-color: #ffeaa7;
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --text-color: #2d3436;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(0,0,0,0.3);
+    --border-radius: 15px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Dancing Script', cursive;
+    background: var(--bg-gradient);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ===== PANTALLA DE CARGA MÁGICA ===== */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.loading-content {
+    text-align: center;
+    color: var(--white);
+}
+
+.magic-heart {
+    margin-bottom: 30px;
+}
+
+.heart-beat {
+    font-size: 80px;
+    animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+    0%, 50%, 100% { transform: scale(1); }
+    25% { transform: scale(1.2); }
+    75% { transform: scale(1.1); }
+}
+
+.loading-title {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.loading-bar {
+    width: 300px;
+    height: 8px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+    margin: 0 auto 30px;
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #ffeaa7, #fd79a8, #fdcb6e);
+    border-radius: 4px;
+    animation: loading 3s ease-in-out infinite;
+}
+
+@keyframes loading {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.sparkles {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sparkles span {
+    font-size: 2rem;
+    animation: sparkle 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.2s);
+}
+
+.sparkles span:nth-child(1) { --i: 0; }
+.sparkles span:nth-child(2) { --i: 1; }
+.sparkles span:nth-child(3) { --i: 2; }
+.sparkles span:nth-child(4) { --i: 3; }
+.sparkles span:nth-child(5) { --i: 4; }
+
+@keyframes sparkle {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.5) rotate(180deg); opacity: 0.7; }
+}
+
+/* ===== PARTÍCULAS DE FONDO ===== */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -2;
+}
+
+#stars-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* ===== MENÚ PRINCIPAL ===== */
+.main-menu {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.menu-container {
+    text-align: center;
+    max-width: 800px;
+}
+
+.main-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    color: var(--white);
+    margin-bottom: 50px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    animation: titleGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,107,157,0.5); }
+    to { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 30px rgba(255,107,157,0.8); }
+}
+
+.menu-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.menu-btn {
+    background: rgba(255,255,255,0.95);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    color: var(--text-color);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,107,157,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.menu-btn:hover::before {
+    left: 100%;
+}
+
+.menu-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.btn-icon {
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.btn-text {
+    font-weight: 600;
+}
+
+/* ===== SECCIONES GENERALES ===== */
+.section {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.back-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.9);
+    border: none;
+    border-radius: 50px;
+    padding: 15px 25px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    z-index: 100;
+}
+
+.back-btn:hover {
+    background: var(--white);
+    transform: translateX(-5px);
+}
+
+/* ===== CARTA DE AMOR ===== */
+.letter-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.letter-envelope {
+    width: 400px;
+    height: 250px;
+    background: #f39c12;
+    border-radius: 10px;
+    position: relative;
+    margin: 0 auto 50px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.letter-envelope:hover {
+    transform: translateY(-10px) rotateY(5deg);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: #e67e22;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    transform-origin: top center;
+    transition: transform 1s ease;
+    z-index: 2;
+}
+
+.envelope-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 130px;
+    background: #f39c12;
+    border-radius: 0 0 10px 10px;
+}
+
+.heart-seal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    animation: sealPulse 2s ease-in-out infinite;
+}
+
+@keyframes sealPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+}
+
+.envelope-flap.open {
+    transform: rotateX(-180deg);
+}
+
+.letter-paper {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    box-shadow: var(--shadow);
+    transform: translateY(50px);
+    opacity: 0;
+    transition: var(--transition);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.letter-paper.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.letter-header h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.date {
+    text-align: center;
+    color: #636e72;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.letter-content {
+    font-size: 1.3rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    text-align: justify;
+    margin-bottom: 30px;
+}
+
+.letter-signature {
+    text-align: right;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.signature {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2rem;
+    color: var(--primary-color);
+    margin-top: 10px;
+}
+
+/* ===== GALERÍA DE FOTOS ===== */
+.gallery-container {
+    max-width: 1200px;
+    text-align: center;
+}
+
+.gallery-container h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.photo-item {
+    position: relative;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+    aspect-ratio: 1;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 3rem;
+}
+
+.photo-item:hover {
+    transform: scale(1.05) rotateY(5deg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: var(--white);
+    padding: 20px;
+    transform: translateY(100%);
+    transition: var(--transition);
+}
+
+.photo-item:hover .photo-overlay {
+    transform: translateY(0);
+}
+
+/* ===== QUIZ DEL AMOR ===== */
+.quiz-container {
+    max-width: 800px;
+    text-align: center;
+}
+
+.quiz-container h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.question-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.question-card.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.question-text {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--text-color);
+}
+
+.answer-options {
+    display: grid;
+    gap: 15px;
+}
+
+.answer-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    border: none;
+    border-radius: var(--border-radius);
+    padding: 15px 20px;
+    color: var(--white);
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.answer-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* ===== CAJA MUSICAL ===== */
+.music-box-container {
+    max-width: 600px;
+    text-align: center;
+}
+
+.music-box-container h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.music-player {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+}
+
+.now-playing {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #f1f2f6;
+}
+
+.album-art {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 2rem;
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.playlist {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.playlist-item {
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 5px;
+}
+
+.playlist-item:hover {
+    background: #f1f2f6;
+}
+
+.playlist-item.active {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+}
+
+.music-controls {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.music-controls button {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.music-controls button:hover {
+    transform: scale(1.2);
+}
+
+/* ===== CALENDARIO DE AMOR ===== */
+.calendar-container {
+    max-width: 800px;
+    text-align: center;
+}
+
+.calendar-container h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.calendar {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+    position: relative;
+}
+
+.calendar-day:hover {
+    background: #f1f2f6;
+}
+
+.calendar-day.special {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    animation: heartBeat 2s ease-in-out infinite;
+}
+
+.event-details {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    min-height: 200px;
+}
+
+/* ===== SORPRESA ESPECIAL ===== */
+.surprise-container {
+    max-width: 600px;
+    text-align: center;
+}
+
+.surprise-container h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    color: var(--white);
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.gift-box {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 30px;
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.gift-box:hover {
+    transform: scale(1.1) rotateY(10deg);
+}
+
+.gift-body {
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    border-radius: 10px;
+    position: absolute;
+    bottom: 0;
+    box-shadow: var(--shadow);
+}
+
+.gift-lid {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(45deg, #e74c3c, #c0392b);
+    border-radius: 10px 10px 5px 5px;
+    position: absolute;
+    top: 0;
+    transition: transform 1s ease;
+    transform-origin: bottom center;
+    box-shadow: var(--shadow);
+}
+
+.gift-lid.open {
+    transform: rotateX(-120deg);
+}
+
+.gift-ribbon {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    width: 10%;
+    height: 100%;
+    background: #f39c12;
+    z-index: 2;
+}
+
+.gift-ribbon::before {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: -200%;
+    width: 500%;
+    height: 10%;
+    background: #f39c12;
+}
+
+.gift-bow {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2rem;
+    z-index: 3;
+}
+
+.surprise-message {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    transform: scale(0);
+    transition: transform 0.5s ease;
+}
+
+.surprise-message.visible {
+    transform: scale(1);
+}
+
+/* ===== CONTROLES DE MÚSICA DE FONDO ===== */
+.background-music-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+}
+
+#bg-music-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+#bg-music-toggle:hover {
+    transform: scale(1.2);
+}
+
+#volume-control {
+    width: 80px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .main-title {
+        font-size: 2.5rem;
+    }
+    
+    .menu-options {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
+    
+    .letter-envelope {
+        width: 300px;
+        height: 200px;
+    }
+    
+    .letter-paper {
+        padding: 20px;
+    }
+    
+    .photo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    
+    .calendar-grid {
+        gap: 5px;
+    }
+    
+    .gift-box {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+/* ===== ANIMACIONES ESPECIALES ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.bounce-in {
+    animation: bounceIn 0.8s ease forwards;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease forwards;
+}
+
+/* ===== EFECTOS ESPECIALES ===== */
+.floating {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.glow {
+    box-shadow: 0 0 20px rgba(255,107,157,0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 20px rgba(255,107,157,0.5); }
+    to { box-shadow: 0 0 30px rgba(255,107,157,0.8); }
+}
